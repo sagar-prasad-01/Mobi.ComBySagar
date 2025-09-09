@@ -36,10 +36,42 @@ bar.addEventListener("click", function () {
         navbar.style.backgroundColor="#eeeeee";
       }
     });
-console.log("hello");
-console.log(abt);
 
 
+
+   const slider = document.getElementById("slider");
+  const totalSlides = slider.children.length;
+  let index = 0;
+  let interval;
+
+  function showSlide(i) {
+    index = (i + totalSlides) % totalSlides;
+    slider.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function startAutoSlide() {
+    interval = setInterval(() => {
+      showSlide(index + 1);
+    }, 5000); // 5 seconds
+  }
+
+  function resetAutoSlide() {
+    clearInterval(interval);
+    startAutoSlide();
+  }
+
+  document.getElementById("next").addEventListener("click", () => {
+    showSlide(index + 1);
+    resetAutoSlide();
+  });
+
+  document.getElementById("prev").addEventListener("click", () => {
+    showSlide(index - 1);
+    resetAutoSlide();
+  });
+
+  // Start automatic sliding
+  startAutoSlide();
 
   const cards = document.querySelectorAll(".card");
 
@@ -58,3 +90,7 @@ console.log(abt);
       img.style.transform = "scale(1)";
     });
   });
+
+
+  
+  
